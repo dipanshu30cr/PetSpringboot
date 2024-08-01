@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Breed Registration</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .sidebar {
+            background-color: #343a40;
+            height: 100vh;
+            width: 200px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 20px;
+        }
+
+        .sidebar h2 {
+            color: #ffffff;
+            margin-bottom: 40px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .sidebar a {
+            color: #ffffff;
+            padding: 10px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 18px;
+            width: 100%;
+            transition: background-color 0.3s, transform 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sidebar a:hover {
+            background-color: #495057;
+            transform: scale(1.05);
+        }
+
+        .main-content {
+            margin-left: 200px;
+            padding: 20px;
+            width: calc(100% - 200px);
+            background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+            animation: backgroundAnimation 10s infinite;
+        }
+
+        @keyframes backgroundAnimation {
+            0% { background: linear-gradient(135deg, #f6d365 0%, #fda085 100%); }
+            50% { background: linear-gradient(135deg, #fda085 0%, #f6d365 100%); }
+            100% { background: linear-gradient(135deg, #f6d365 0%, #fda085 100%); }
+        }
+
+        .container {
+            max-width: 1200px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #333;
+            text-shadow: 1px 1px 2px #fff;
+        }
+
+        .btn-primary {
+            padding: 12px 24px;
+            border: none;
+            background-color: #007BFF;
+            color: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 1.25rem;
+            text-align: center;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        form input[type="text"], form select {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
+        }
+
+        form button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #007BFF;
+            color: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        form button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Online Pet Shop</h2>
+        <a href="/">
+            <i class="fas fa-home"></i>
+            Home
+        </a>
+        <a href="/Categories">
+            <i class="fas fa-list-alt"></i>
+            Categories
+        </a>
+        <a href="/breed">
+            <i class="fas fa-dog"></i>
+            Breed
+        </a>
+        <a href="/pet">
+            <i class="fas fa-paw"></i>
+            Pet
+        </a>
+    </div>
+
+    
+    <div class="main-content">
+    <div class="container">
+        <h2 class="category-management">Breed Registration <i class="fa-solid fa-dog"></i></h2>
+        <form action="/breed/save" method="post">
+            <div class="form-group">
+                <label for="category">Category</label>
+                <select id="category" name="cid.id" required>
+                    <option value="" disabled selected>Select Category</option>
+                    <!-- Populate with categories -->
+                    <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="bname">Breed Name</label>
+                <input type="text" id="bname" name="bname" placeholder="Breed Name" required>
+            </div>
+            <div class="form-group">
+                <label for="specification">Specification</label>
+                <input type="text" id="specification" name="specification" placeholder="Specification" maxlength="60"  required>
+            </div>
+            <button type="submit" class="btn btn-primary">Register Breed</button>
+        </form>
+    </div>
+</div>
+    
+    
+    
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
